@@ -7,14 +7,12 @@ print('Привет! Давай сыграем в игру "Угадай чис�
 def is_valid(low, high, num: str) -> bool:
     """
     Проверка корректности вводимых данных
-
     """
     return num.isdigit() and low <= int(num) <= high and float(num) % 1 == 0.0
 
 def is_valid_low_range(edge: str) -> int:
     """
     Проверка введенной нижней границы
-
     """
     if edge.isdigit():
         return int(edge)
@@ -25,7 +23,6 @@ def is_valid_low_range(edge: str) -> int:
 def is_valid_high_range(edge: str, low) -> int:
     """
     Проверка введенной верхней границы
-
     """
     if edge.isdigit() and int(edge) > low:
         return int(edge)
@@ -36,7 +33,6 @@ def is_valid_high_range(edge: str, low) -> int:
 def new_game(wish: str) -> bool:
     """
     Запрос на запуск новой игры
-
     """
     if wish in ['y', 'n']:
         return wish == 'y'
