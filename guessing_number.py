@@ -56,34 +56,26 @@ def game():
         high_range = is_valid_high_range(input('Введите верхнюю границу диапазона: '), low_range)
         number = random.randint(low_range, high_range)      #выбор случайно числа из заданного диапазона
         try_limit = ceil(log2(high_range - low_range + 2))      #ограничение количества попыток
-        # + 2 добавлено для определения минимального количества попыток, равного двум
-        count_try = 1       #переменная подсчета количества попыток
+        # '+ 2' добавлено для определения минимального количества попыток, равного двум, для любого диапазона угадывания
         attempt = input(f'\nИтак, игра началась!\n\
 Загадано число от {low_range} до {high_range}. Количество попыток: {try_limit}. Справишься? {chr(128520)}\n\
 Введи предполагаемое число: ')
 
-        while try_limit >= 1:
+        for try_number in range(1, try_limit + 1):
             if not is_valid(low_range, high_range, attempt):
-                try_limit -= 1
-                count_try += 1
-                attempt = input(f'Неверные данные. Осталось попыток: {try_limit}\n\
-Введи целое число от {low_range} до {high_range}: ')
+                attempt = input(f'Неверные данные. Введи целое число от {low_range} до {high_range}: ')
                 continue
+            elif int(attempt) == number:
+                print(f'\nПоздравляю! Ты угадал число {attempt} с {try_number} попытки\nОтличная игра!')
+                break
             elif int(attempt) > number:
-                try_limit -= 1
-                count_try += 1
-                attempt = input(f'Загаданное число МЕНЬШЕ вашего. Осталось попыток: {try_limit}\n\
-Попробуй снова: ')
-                continue
-            elif int(attempt) < number:
-                try_limit -= 1
-                count_try += 1
-                attempt = input(f'Загаданное число БОЛЬШЕ вашего. Осталось попыток: {try_limit}\n\
+                attempt = input(f'Загаданное число МЕНЬШЕ вашего. Осталось попыток: {try_limit - try_number}\n\
 Попробуй снова: ')
                 continue
             else:
-                print(f'\nПоздравляю! Ты угадал число {attempt} с {count_try} попытки\nОтличная игра!')
-                break
+                attempt = input(f'Загаданное число БОЛЬШЕ вашего. Осталось попыток: {try_limit - try_number}\n\
+Попробуй снова: ')
+                continue
         else:
             print('Упс, попытки закончились...')
         desire = input('\nХотите сыграть ещё раз? (y - да, n - нет): ')
