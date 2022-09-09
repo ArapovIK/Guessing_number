@@ -36,9 +36,7 @@ def creating_random_base() -> str:
     if input_check_text(input('Включать спецсимволы "%$#@!" ? (да/нет, по умолчанию да): ')):
         random_base += "%$#@!"
     if input_check_text(input('Исключать неопределенные символы "Ilo0O" ? (да/нет, по умолчанию да): ')):
-        for symbol in "Ilo0O":
-            if symbol in random_base:
-                random_base = random_base.replace(symbol, '')
+        random_base = [symbol for symbol in random_base if symbol not in 'Ilo0O']
     return random_base
 
 def main():
@@ -58,10 +56,8 @@ def main():
 
         print('\nСгенерированные пароли:')
 
-        for _ in range(count_pas):
-            for symbol in random.choices(random_base, k=len_pas):
-                print(symbol, end='')
-            print()
+        generated_pass = [''.join(random.choices(random_base, k=len_pas)) for _ in range(count_pas)]
+        print(*generated_pass, sep='\n')
 
         if input_check_text(input('\nХотите сгенерировать пароль ещё раз? (да/нет): ')):
             continue
