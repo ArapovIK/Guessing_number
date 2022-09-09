@@ -31,11 +31,11 @@ def creating_random_base() -> str:
     :return:
     '''
     random_base = string.ascii_letters
-    if input_check_text(input('Включать цифры? (да/нет, по умолчанию да): ')):
+    if input_check_text(input('Добавить цифры? (да/нет, по умолчанию да): ')):
         random_base += string.digits
-    if input_check_text(input('Включать спецсимволы "%$#@!" ? (да/нет, по умолчанию да): ')):
+    if input_check_text(input('Добавить спецсимволы "%$#@!" ? (да/нет, по умолчанию да): ')):
         random_base += "%$#@!"
-    if input_check_text(input('Исключать неопределенные символы "Ilo0O" ? (да/нет, по умолчанию да): ')):
+    if input_check_text(input('Исключить неопределенные символы "Ilo0O" ? (да/нет, по умолчанию да): ')):
         random_base = [symbol for symbol in random_base if symbol not in 'Ilo0O']
     return random_base
 
@@ -48,21 +48,19 @@ def main():
         # считывание данных, вводимых пользователем
         count_pas = input_digit_check(input('Укажите количество паролей: '))
         len_pas = input_digit_check(input('Укажите длину одного пароля: '))
-        # add_digits = input_check_text(input('Включать цифры? (да/нет): '))
-        # add_punct = input_check_text(input('Включать спецсимволы "%$#@!" ? (да/нет): '))
-        # exclude_uncertain = input_check_text(input('Исключать неопределенные символы "Ilo0O" ? (да/нет): '))
         # формирование базы для генерации паролей
         random_base = creating_random_base()
 
         print('\nСгенерированные пароли:')
 
+        # формирование и отображение списка заданного количества паролей заданной длины
         generated_pass = [''.join(random.choices(random_base, k=len_pas)) for _ in range(count_pas)]
         print(*generated_pass, sep='\n')
 
+        #запрос на новую генерацию пароля
         if input_check_text(input('\nХотите сгенерировать пароль ещё раз? (да/нет): ')):
             continue
         else:
             break
     escape = input('Нажмите ENTER для выхода')
-
 main()
