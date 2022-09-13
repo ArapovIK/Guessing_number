@@ -14,14 +14,14 @@ def input_digit_check(user_input_num: str) -> int:
     else:
         return input_digit_check(input('Ошибка ввода. Введите целое число: '))
 
-def input_check_text(user_input_text = 'да') -> bool:
+def input_check_text(user_input_text) -> bool:
     '''
     Проверка корректности вводимого текста
     :param user_input_text:
     :return:
     '''
-    if user_input_text in ['да', 'нет']:
-        return user_input_text == 'да'
+    if user_input_text in ['', 'да', 'нет']:
+        return user_input_text == 'да' or user_input_text == ''
     else:
         return input_check_text(input('Ошибка ввода. Введите "да" или "нет": '))
 
